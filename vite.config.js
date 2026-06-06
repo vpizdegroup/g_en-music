@@ -6,11 +6,14 @@ export default defineConfig({
   server: {
     port: 3000,
     host: '0.0.0.0',
-    allowedHosts: 'all'
+    allowedHosts: ['gen-app-67i6.onrender.com', '.onrender.com', 'localhost', '127.0.0.1', '0.0.0.0']
   },
   preview: {
     port: 3000,
     host: '0.0.0.0',
-    allowedHosts: 'all'
+    allowedHosts: ['gen-app-67i6.onrender.com', '.onrender.com', 'localhost', '127.0.0.1', '0.0.0.0']
+  },
+  build: {
+    outDir: 'dist'
   }
 })
