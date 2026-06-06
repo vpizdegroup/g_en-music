@@ -1,11 +1,6 @@
 import { createApp } from 'vue'
-import MusicPlayer from './components/MusicPlayer.vue'
+import App from './App.vue'
+import './style.css'
 
-const app = createApp({
-  components: {
-    MusicPlayer
-  },
-  template: `<MusicPlayer />`
-})
-
+const app = createApp(App)
 app.mount('#app')

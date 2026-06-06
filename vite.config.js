@@ -6,11 +6,11 @@ export default defineConfig({
   server: {
     port: 3000,
     host: '0.0.0.0',
-    allowedHosts: ['gen-app-67i6.onrender.com', 'localhost', '127.0.0.1']
+    middlewareMode: false
   },
   preview: {
     port: 3000,
     host: '0.0.0.0',
-    allowedHosts: ['gen-app-67i6.onrender.com', 'localhost', '127.0.0.1']
+    middlewareMode: false
   }
 })

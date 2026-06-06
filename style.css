@@ -4,19 +4,17 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: #0a0a0a;
-    color: #ffffff;
-    overflow: hidden;
-}
-
 html, body, #app {
     width: 100%;
     height: 100%;
 }
 
-/* Main Container */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+}
+
 #app {
     display: flex;
     align-items: center;
@@ -68,7 +66,6 @@ html, body, #app {
     box-shadow: 0 0 8px rgba(0, 255, 136, 0.8);
 }
 
-/* Header */
 .header {
     padding: 20px 16px 16px;
     display: flex;
@@ -90,9 +87,8 @@ html, body, #app {
     box-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
 }
 
-/* AI Button (Pill) */
 .ai-button {
-    width: 100%;
+    width: calc(100% - 32px);
     height: 56px;
     background: linear-gradient(135deg, #00ff88 0%, #00ccff 100%);
     border-radius: 28px;
@@ -110,21 +106,7 @@ html, body, #app {
     color: #ff00ff;
     position: relative;
     overflow: hidden;
-}
-
-.ai-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-}
-
-.ai-button:hover::before {
-    left: 100%;
+    animation: glow 2s ease-in-out infinite;
 }
 
 .ai-button:hover {
@@ -139,7 +121,6 @@ html, body, #app {
     clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 82%, 18% 100%, 0% 38%);
 }
 
-/* Content Area */
 .content {
     flex: 1;
     display: flex;
@@ -153,16 +134,11 @@ html, body, #app {
     width: 4px;
 }
 
-.content::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 .content::-webkit-scrollbar-thumb {
     background: rgba(0, 255, 136, 0.3);
     border-radius: 2px;
 }
 
-/* Playlists */
 .playlists-container {
     padding: 0 16px;
     display: grid;
@@ -184,22 +160,9 @@ html, body, #app {
     box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
 }
 
-.playlist-card::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(0, 0, 0, 0.1) 50%, transparent 70%);
-    animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+.playlist-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
 }
 
 .playlist-icon {
@@ -212,12 +175,6 @@ html, body, #app {
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
 }
 
-.playlist-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
-}
-
-/* Player Bar */
 .player-bar {
     height: 60px;
     background: rgba(80, 80, 80, 0.6);
@@ -236,11 +193,6 @@ html, body, #app {
 .player-bar:hover {
     background: rgba(80, 80, 80, 0.8);
     box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-}
-
-.player-bar.active {
-    background: rgba(100, 100, 100, 0.8);
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
 }
 
 .track-name {
@@ -263,12 +215,6 @@ html, body, #app {
     transition: all 0.3s ease;
 }
 
-.play-button:hover {
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-/* Full Player Modal */
 .player-modal {
     position: fixed;
     top: 0;
@@ -482,16 +428,6 @@ html, body, #app {
     border-radius: 1px;
 }
 
-/* Animations */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-    }
-}
-
 @keyframes glow {
     0%, 100% {
         box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
@@ -501,11 +437,6 @@ html, body, #app {
     }
 }
 
-.ai-button {
-    animation: glow 2s ease-in-out infinite;
-}
-
-/* Mobile optimizations */
 @media (max-width: 480px) {
     .phone-frame {
         width: 100%;
