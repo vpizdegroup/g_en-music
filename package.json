@@ -1,0 +1,19 @@
+{
+  "name": "g_en-music",
+  "version": "1.0.0",
+  "description": "Free music streaming application",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "vite": "^4.4.0",
+    "@vitejs/plugin-vue": "^4.3.0"
+  }
+}
