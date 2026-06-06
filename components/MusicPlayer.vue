@@ -101,6 +101,7 @@ export default {
       duration: 180,
       progress: 0,
       currentTrack: null,
+      playInterval: null,
       playlists: [
         { id: 1, name: 'Playlist 1' },
         { id: 2, name: 'Playlist 2' },
@@ -126,7 +127,6 @@ export default {
       this.isPlayerOpen = false;
     },
     selectPlaylist(playlist) {
-      // Select first track from playlist
       if (this.tracks.length > 0) {
         this.currentTrack = this.tracks[0];
         this.openPlayer();
@@ -136,10 +136,13 @@ export default {
       this.isPlaying = !this.isPlaying;
       if (this.isPlaying) {
         this.startPlayback();
+      } else {
+        if (this.playInterval) clearInterval(this.playInterval);
       }
     },
     startPlayback() {
-      const interval = setInterval(() => {
+      if (this.playInterval) clearInterval(this.playInterval);
+      this.playInterval = setInterval(() => {
         if (this.isPlaying) {
           this.currentTime += 0.1;
           this.progress = (this.currentTime / this.duration) * 100;
@@ -147,8 +150,6 @@ export default {
           if (this.currentTime >= this.duration) {
             this.nextTrack();
           }
-        } else {
-          clearInterval(interval);
         }
       }, 100);
     },
@@ -161,6 +162,7 @@ export default {
       }
       this.currentTime = 0;
       this.progress = 0;
+      this.duration = this.currentTrack.duration || 180;
       if (this.isPlaying) {
         this.startPlayback();
       }
@@ -174,6 +176,7 @@ export default {
       }
       this.currentTime = 0;
       this.progress = 0;
+      this.duration = this.currentTrack.duration || 180;
       if (this.isPlaying) {
         this.startPlayback();
       }
@@ -181,20 +184,22 @@ export default {
     seek(event) {
       const rect = event.currentTarget.getBoundingClientRect();
       const percentage = (event.clientX - rect.left) / rect.width;
-      this.currentTime = percentage * this.duration;
-      this.progress = percentage * 100;
+      this.currentTime = Math.max(0, Math.min(percentage * this.duration, this.duration));
+      this.progress = (this.currentTime / this.duration) * 100;
     },
     formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
+      const mins = Math.floor(seconds / 60);
       const secs = Math.floor(seconds % 60);
-      return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
   },
   mounted() {
-    // Initialize first track
     if (this.tracks.length > 0) {
       this.currentTrack = this.tracks[0];
     }
+  },
+  beforeUnmount() {
+    if (this.playInterval) clearInterval(this.playInterval);
   }
 };
 </script>

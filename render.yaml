@@ -3,9 +3,11 @@ services:
     name: gen-music
     runtime: node
     buildCommand: npm install && npm run build
-    startCommand: npm run preview
+    startCommand: npm run preview -- --host 0.0.0.0 --port 3000
     envVars:
       - key: NODE_ENV
         value: production
+      - key: HOST
+        value: 0.0.0.0
       - key: PORT
         value: 3000
